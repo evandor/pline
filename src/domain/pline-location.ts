@@ -1,7 +1,7 @@
 export class PlineLocation {
-    placeName: string;
+    name: string;
     longitude: number;
     latitude: number;
     address: string;
-    placeIcon: string;
+    icon: string;
 }

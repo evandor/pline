@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
@@ -22,7 +22,6 @@ export class SignUpPage {
 
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams,
     angFire: AngularFire,
     public storage: Storage,
     private formBuilder: FormBuilder,

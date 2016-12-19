@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, ViewController } from 'ionic-angular';
 
 /*
   Generated class for the SearchLocationModal page.
@@ -13,10 +13,10 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class SearchLocationModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchLocationModalPage');
-  }
+  dismiss() {
+    this.viewCtrl.dismiss();
+}
 
 }

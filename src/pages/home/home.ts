@@ -39,13 +39,13 @@ export class HomePage {
     storage.get('places').then((result) => {
       if (result == null) {
         //test-data START
-        this.testLocation1.placeName = "HorseTestLocation New";
+        this.testLocation1.name = "HorseTestLocation New";
         this.testLocation1.latitude = 48.1433036;
         this.testLocation1.longitude = 11.6552563;
         this.testLocation1.address = "Trabrennbahn München-Daglfing, Rennbahnstraße, München";
         this.places.push(this.testLocation1);
 
-        this.testLocation2.placeName = "BeerTestLocation New";
+        this.testLocation2.name = "BeerTestLocation New";
         this.testLocation2.latitude = 47.8701866;
         this.testLocation2.longitude = 12.6462623;
         this.testLocation2.address = "Brauerei-Ausschank Schnitzlbaumer, Taubenmarkt, Traunstein";
@@ -63,7 +63,7 @@ export class HomePage {
         var message1: Message = new Message();
         var user1: User = new User("Izzy", "izzy@pline.one");
         var locationA: PlineLocation = new PlineLocation();
-        locationA.placeName = "office";
+        locationA.name = "office";
         message1.user = user1;
         message1.timeStamp = 1480586400;
         message1.messageType = 0;
@@ -73,7 +73,7 @@ export class HomePage {
         var message2: Message = new Message();
         var user2: User = new User("Linus", "linus@pline.one"); 
         var locationB: PlineLocation = new PlineLocation();
-        locationB.placeName = "home";
+        locationB.name = "home";
 
         message2.user = user2;
         message2.timeStamp = 1480838400;
