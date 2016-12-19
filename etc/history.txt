@@ -1,0 +1,8 @@
+
+locking orientation to portrait (no landscape) in config.xml:
+<preference name="orientation" value="portrait" />
+
+npm install --save angular2-moment
+npm install @types/request@0.0.30 --save-dev --save-exact
+npm install firebase angularfire2 --save
+ionic plugin add cordova-plugin-camera

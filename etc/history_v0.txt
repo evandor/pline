@@ -1,0 +1,143 @@
+=== Commands ===============================
+
+Installation
+------------
+
+  git clone http://github.com/evandor/plineapp
+  cd pline
+  npm install
+  npm install -g cordova
+  npm install -g ios-sim
+  npm install -g ios-deploy
+  ionic build (ggfs mehrfach)
+
+  Xcode: project oeffnen
+
+  xcode-select --install (check: https://github.com/nodejs/node-gyp/issues/569)
+
+  ionic plugin add cordova-plugin-camera
+
+  sudo gem install cocoapods
+  pod setup 
+
+Run 
+---
+
+ionic serve --address localhost
+ionic run ios --device
+cordova run ios --device
+
+Cleanup
+-------
+
+build.sh
+
+Tests (http://www.joshmorony.com/how-to-unit-test-an-ionic-2-application/)
+-----
+
+npm install karma --save-dev
+
+Libraries Details:
+------------------
+
+  Font Awesome
+  http://stackoverflow.com/questions/39122669/using-font-awesome-in-ionic-2
+
+  Moment.js
+  http://stackoverflow.com/questions/35166168/how-to-use-moment-js-library-in-angular-2-typescript-app > 40
+
+  Firebase
+  http://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
+  https://javebratt.com/ionic-2-firebase-3-week-1/
+
+  npm install @types/request@0.0.30 --save-dev --save-exact
+  npm install firebase angularfire2 --save
+
+Info
+----
+
+ionic info
+cordova info
+npm -g list xxx
+
+Configuration
+-------------
+
+ionic resources --icon
+ionic resources --splash
+
+locking orientation to portrait (no landscape) in config.xml:
+<preference name="orientation" value="portrait" />
+ionic build
+
+
+=== What we did today... ===================
+
+sudo npm uninstall -g cordova ionic
+npm list -g ionic
+
+wildes Löschen in User/usr-Dirs
+
+https://nodejs.org/en/
+
+sudo npm install -g ionic cordova
+sudo npm install -g ios-sim
+sudo chown mira:admin /usr/local/lib/node_modules/
+sudo npm install -g ios-deploy
+
+ionic start plineapp --v2
+
+https://apps.ionic.io/signup
+
+https://cordova.apache.org/docs/en/latest/guide/platforms/ios/
+xcode-select --install
+
+https://github.com/driftyco/ionic-storage
+npm install @ionic/storage
+cordova plugin add cordova-sqlite-storage --save
+
+=== Push Notifications ========================
+
+http://docs.ionic.io/services/push/
+http://docs.ionic.io/setup.html#installation
+http://docs.ionic.io/services/profiles/#ios-push-certificate
+
+  npm install @ionic/cloud-angular --save
+
+    
+
+  >>> Error: CocoaPods was not found. Please install version 1.0.1 or greater from https://cocoapods.org/
+
+  sudo gem install cocoapods
+
+  pod setup 
+  
+  >>> error: already exists
+
+
+============= Geolocation stuff ===================
+
+ionic plugin add cordova-plugin-geolocation --save
+
+added to index.html for geolocation stuff:
+<script src="http://maps.google.com/maps/api/js"></script>
+
+API-KEY generated for Google (Maps); account: Mica
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=OUR_KEY&libraries=places"></script>
+
+
+In case Safari is blocking geolocation - change in Preferences/Privacy like this:
+https://support.apple.com/en-us/HT204690  > didn't help, still not solved
+
+Autocomplete address:
+https://github.com/guillefd/ionic2-google-maps-autocomplete
+https://ionicallyspeaking.com/2016/06/07/google-places-autocomplete-and-ionic-2/
+
+ionic g page ModalAutocompleteItems
+
+Just in case no API keys are being found:
+To get the latest @ionic/app-scripts, run:
+npm install @ionic/app-scripts@latest --save-dev
+====================================================
+
+

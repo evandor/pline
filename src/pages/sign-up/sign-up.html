@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-title>Sign Up</ion-title>
+    <ion-buttons end>
+      <button ion-button type="submit" [disabled]="!registerFormGroup.valid" (click)="register()">
+        Done
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row>
+    <ion-col> 
+      <button ion-button (click)="getProfilePicture()">
+        Set Profile Picture   
+      </button>
+    </ion-col>
+    <ion-col>
+      <p> Enter your name and email address and add an optional profile picture</p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+    <form [formGroup]="registerFormGroup" (ngSubmit)="register()">
+      <ion-item>
+        <ion-label>Your name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Your email</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+    </form>
+  </ion-col>
+</ion-row>
+</ion-content>
