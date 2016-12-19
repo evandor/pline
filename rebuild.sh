@@ -4,4 +4,4 @@ mkdir www
 
 npm install
 ionic build
-ionic platform add ios
+#ionic platform add ios

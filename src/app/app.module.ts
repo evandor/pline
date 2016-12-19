@@ -15,7 +15,6 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
 // AF2 Settings
-
 export const firebaseConfig = {
   apiKey: "AIzaSyDICkKdSMNgbcMfxYgJVYVsGN8Qb1XFWZk",
   authDomain: "pline-145318.firebaseapp.com",

@@ -8,6 +8,7 @@ import { Camera } from 'ionic-native';
 import { HomePage } from '../home/home';
 
 
+
 @Component({
   selector: 'page-sign-up',
   templateUrl: 'sign-up.html'
@@ -48,7 +49,7 @@ export class SignUpPage {
       name: this.user.userName, email: this.user.userEmail
     }); 
 
-   /* if (this.user.profilePicture != null) {
+   /*if (this.user.profilePicture != null) {
       this.profilePictureRef.child(this.user.userEmail).child('profilePicture.png')
         .putString(this.user.profilePicture, 'base64', { contentType: 'image/png' })
         .then((savedPicture) => {
