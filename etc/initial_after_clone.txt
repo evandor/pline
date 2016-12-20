@@ -1,0 +1,6 @@
+cd <into project dir> 
+npm install
+mkdir www
+ionic platform add ios
+ionic build ios
+

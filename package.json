@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "plineapp",
+  "author": "Mica",
+  "homepage": "http://pline.one/",
   "private": true,
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
@@ -34,6 +34,7 @@
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
+    "cordova-plugin-camera",
     "cordova-plugin-console",
     "cordova-plugin-statusbar",
     "cordova-plugin-device",
@@ -49,5 +50,5 @@
       "locator": "ios"
     }
   ],
-  "description": "pline: An Ionic project"
+  "description": "plineapp: An Ionic project"
 }
