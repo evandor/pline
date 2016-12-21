@@ -1,0 +1,5 @@
+http://www.joshmorony.com/how-to-unit-test-an-ionic-2-application/
+
+npm install karma --save-dev
+
+npm install -g karma-cli
