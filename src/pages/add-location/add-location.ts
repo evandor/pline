@@ -36,6 +36,7 @@ export class AddLocationPage implements OnInit {
 
   ngOnInit() {
     this.setCurrentLocation();
+
   }
 
   saveLocation() {
@@ -70,8 +71,26 @@ export class AddLocationPage implements OnInit {
       this.addLocationMap = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
       ctx.addLocationFormGroup.controls['address'].setValue(currentLoc.address);
+
+      //add a marker to the map
+      let marker = new google.maps.Marker({
+        map: this.addLocationMap,
+        animation: google.maps.Animation.DROP,
+        position: this.addLocationMap.getCenter()
+      });
+      //add Info to marker
+      let infoWindow = new google.maps.InfoWindow({
+        content: currentLoc.address
+      });
+
+      google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.addLocationMap, marker);
+      });
+
     });
 
   }
+
+
 
 }
