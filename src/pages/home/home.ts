@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef  } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -11,7 +11,7 @@ import { AddLocationPage } from '../add-location/add-location';
 import { TrackingService } from '../../providers/tracking-service';
 import { LocationService } from '../../providers/location-service';
 
-import { ViewChild, ElementRef } from '@angular/core';
+
 import * as moment from 'moment';
 
 declare var google;
@@ -19,7 +19,7 @@ declare var google;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [TrackingService, LocationService]
+  providers: [TrackingService]
 })
 export class HomePage {
 
@@ -108,6 +108,12 @@ export class HomePage {
     
   }
 
+  ngOnInit() {
+
+    this.loadMap();
+
+  }
+
   openAddLocationPage(){
     this.navCtrl.push(AddLocationPage);
   }
@@ -117,14 +123,10 @@ export class HomePage {
 
   }
 
-  ngOnInit() {
-
-    this.loadMap();
-
-  }
+  
 
   loadMap() {
-    //test-data for now; later a map with all contact's last check-ins should be shown
+    //test-data for now; later a map with pins for all contact's last check-ins should be shown
     let latLng = new google.maps.LatLng(47.8693807, 12.646161);
 
     let mapOptions = {

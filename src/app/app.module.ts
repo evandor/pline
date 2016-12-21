@@ -11,6 +11,7 @@ import { ContactsPage } from '../pages/contacts/contacts';
 import { InviteContactPage } from '../pages/invite-contact/invite-contact';
 
 import { Storage } from '@ionic/storage';
+import { LocationService } from '../providers/location-service';
 import {TimestampPipe} from '../pipes/timestamp-pipe';
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
@@ -53,6 +54,6 @@ export const firebaseConfig = {
     ContactsPage,
     InviteContactPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage, LocationService]
 })
 export class AppModule {}

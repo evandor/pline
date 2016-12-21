@@ -22,7 +22,7 @@ export class MyApp {
       this.storage.get('introShown').then((result) => {
 
         if (result) {
-          this.storage.remove ('introShown');
+          //this.storage.remove ('introShown');
           this.rootPage = HomePage;
         } else {
           this.rootPage = IntroPage;
