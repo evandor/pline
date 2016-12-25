@@ -15,4 +15,18 @@
 
 <ion-content padding>
 
+  <div *ngIf="locationsEmpty()">There are no saved places.</div>
+  <div *ngIf="!locationsEmpty()">
+
+    <ion-row *ngFor="let location of locations">
+      <ion-col text-left width-50> 
+          {{location?.name}}
+      </ion-col>
+      <ion-col>
+         {{location?.address}}
+      </ion-col>
+    </ion-row>
+
+  </div>
+
 </ion-content>

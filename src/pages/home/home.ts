@@ -7,6 +7,7 @@ import { PlineLocation } from '../../domain/pline-location';
 import { User } from '../../domain/user';
 
 import { AddLocationPage } from '../add-location/add-location';
+import { LocationsPage } from '../locations/locations';
 
 import { TrackingService } from '../../providers/tracking-service';
 import { LocationService } from '../../providers/location-service';
@@ -38,19 +39,6 @@ export class HomePage {
 
     storage.get('places').then((result) => {
       if (result == null) {
-        //test-data START
-        this.testLocation1.name = "HorseTestLocation New";
-        this.testLocation1.latitude = 48.1433036;
-        this.testLocation1.longitude = 11.6552563;
-        this.testLocation1.address = "Trabrennbahn München-Daglfing, Rennbahnstraße, München";
-        this.places.push(this.testLocation1);
-
-        this.testLocation2.name = "BeerTestLocation New";
-        this.testLocation2.latitude = 47.8701866;
-        this.testLocation2.longitude = 12.6462623;
-        this.testLocation2.address = "Brauerei-Ausschank Schnitzlbaumer, Taubenmarkt, Traunstein";
-        this.places.push(this.testLocation2);
-        //test-data END
         storage.set("places", this.places);
       }
     });
@@ -118,6 +106,10 @@ export class HomePage {
     this.navCtrl.push(AddLocationPage);
   }
   
+  openLocationsPage(){
+    this.navCtrl.push(LocationsPage);
+  }
+
   public messagesEmpty() {
     return this.messages.length == 0;
 

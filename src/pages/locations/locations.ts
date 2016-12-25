@@ -1,22 +1,30 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { PlineLocation } from '../../domain/pline-location';
+import { Storage } from '@ionic/storage';
 
-/*
-  Generated class for the Locations page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-locations',
   templateUrl: 'locations.html'
 })
 export class LocationsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  locations: Array<PlineLocation> = new Array();
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LocationsPage');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public storage: Storage) {
+
+
+    storage.get('places').then((result) => {
+      this.locations = result;
+    });
+  }
+
+  public locationsEmpty() {
+    return this.locations.length == 0;
   }
 
 }

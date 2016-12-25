@@ -19,6 +19,7 @@ export class AddLocationPage implements OnInit {
   location: PlineLocation = new PlineLocation();
   @ViewChild('addLocationMap') mapElement: ElementRef;
   addLocationMap: any;
+  latLng: any;
 
   constructor(
     public navCtrl: NavController,
@@ -51,6 +52,20 @@ export class AddLocationPage implements OnInit {
 
   openSearchLocationModal() {
     let modal = this.modalCtrl.create(SearchLocationModalPage);
+    modal.onDidDismiss(searchResult => {
+
+      if (searchResult) {
+        this.location.address = searchResult.formatted_address;
+        this.location.latitude = searchResult.geometry.location.lat();
+        this.location.longitude = searchResult.geometry.location.lng();
+        this.addLocationFormGroup.controls['address'].setValue(this.location.address);
+        this.latLng = searchResult.geometry.location;
+        this.addLocationMap.setCenter(this.latLng);
+        this.createMapMaker(searchResult);
+        console.log("Our new location", this.location);
+
+      }
+    });
     modal.present();
   }
 
@@ -60,10 +75,10 @@ export class AddLocationPage implements OnInit {
 
     var ctx = this;
     this.locService.getCurrentPlineLocation().then((currentLoc) => {
-      let latLng = new google.maps.LatLng(currentLoc.latitude, currentLoc.longitude);
+      ctx.latLng = new google.maps.LatLng(currentLoc.latitude, currentLoc.longitude);
 
       let mapOptions = {
-        center: latLng,
+        center: ctx.latLng,
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
@@ -78,15 +93,23 @@ export class AddLocationPage implements OnInit {
         animation: google.maps.Animation.DROP,
         position: this.addLocationMap.getCenter()
       });
-      //add Info to marker
+      //show current address when user taps marker
       let infoWindow = new google.maps.InfoWindow({
         content: currentLoc.address
       });
-
       google.maps.event.addListener(marker, 'click', () => {
-      infoWindow.open(this.addLocationMap, marker);
+        infoWindow.open(this.addLocationMap, marker);
       });
 
+    });
+
+  }
+
+  createMapMaker(place: any): void {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+      map: this.addLocationMap,
+      position: placeLoc
     });
 
   }

@@ -5,3 +5,9 @@ locking orientation to portrait (no landscape) in config.xml:
 npm install --save angular2-moment
 npm install @types/request@0.0.30 --save-dev --save-exact
 npm install firebase angularfire2 --save
+
+-> geolocation problem?
+
+ionic plugin add cordova-plugin-geolocation --save
+ionic platform rm ios
+ionic platform add ios

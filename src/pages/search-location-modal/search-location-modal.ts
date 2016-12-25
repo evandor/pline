@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
 
-/*
-  Generated class for the SearchLocationModal page.
+declare var google: any;
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-search-location-modal',
   templateUrl: 'search-location-modal.html'
 })
-export class SearchLocationModalPage {
+export class SearchLocationModalPage implements OnInit {
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController) {}
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController) { }
+
+  ngOnInit() {
+    var input = document.getElementById('pac-input');
+    var autoComplete = new google.maps.places.Autocomplete(input);
+    var ctx = this;
+    autoComplete.addListener('place_changed', function (v1,v2) {
+      var place = this.getPlace();
+      console.log(place);
+      ctx.viewCtrl.dismiss(place);
+    });
+
+  }
 
   dismiss() {
     this.viewCtrl.dismiss();
-}
+  }
 
 }
