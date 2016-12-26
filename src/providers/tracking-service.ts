@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { Message, MessageType } from '../domain/message';
 import { PlineLocation } from '../domain/pline-location';
 import { User } from '../domain/user';
@@ -15,7 +15,7 @@ export class TrackingService {
     locationMatches: Array<PlineLocation> = new Array();
     storage: Storage;
 
-    /*public register(storage: Storage, locationService: LocationService): Observable<Promise<Message>> {
+    public register(storage: Storage, locationService: LocationService): Observable<Promise<Message>> {
         console.log("Tracking Service initialized...");
         this.storage = storage;
 
@@ -65,7 +65,7 @@ export class TrackingService {
                 });
             });
         });
-    }*/
+    }
 
 
     private createMessage(text: string): Message { //loc: PlineLocation, type: MessageType): Message {
