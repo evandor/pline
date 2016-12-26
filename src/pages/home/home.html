@@ -17,7 +17,7 @@
   </ion-toolbar>
   <ion-content>
     <ion-list>
-      <button ion-item>
+      <button ion-item (click)=openContactsPage()>
        Edit Contacts
       </button>
       <button ion-item (click)="openLocationsPage()">
@@ -45,7 +45,7 @@
       </button>
       </ion-col>
       <ion-col>
-        <button ion-button clear>   
+        <button ion-button clear (click)="openInviteContactPage()">   
          <ion-icon name="ios-person-add-outline"></ion-icon>
       </button>
       </ion-col>
@@ -67,12 +67,12 @@
         </ion-avatar>
       </ion-col>
       <ion-col text-left width-50> 
-          {{message?.user.userName}}
+          {{message?.user.name}}
        <span [ngSwitch]="message?.messageType">
         <span *ngSwitchCase="0">arrived at</span>
         <span *ngSwitchCase="1">left</span>
       </span>
-         {{message?.location.placeName}}
+         {{message?.location.name}}
       </ion-col>
       <ion-col>
          {{message?.timeStamp|timestampPipe}}

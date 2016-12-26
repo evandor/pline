@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { User } from '../../domain/user';
 import { Camera } from 'ionic-native';
 import { HomePage } from '../home/home';
+import { UUID } from 'angular2-uuid';
 
 
 
@@ -19,6 +20,7 @@ export class SignUpPage {
   registerFormGroup: FormGroup;
   profilePictureRef: any;
   user = new User();
+  users_local: Array<User> = new Array();
 
   constructor(
     public navCtrl: NavController, 
@@ -40,12 +42,19 @@ export class SignUpPage {
 
   register(){
 
-    this.user.userName = this.registerFormGroup.value.name;
-    this.user.userEmail = this.registerFormGroup.value.email;
+    this.user.id = UUID.UUID();
+    this.user.name = this.registerFormGroup.value.name;
+    this.user.email = this.registerFormGroup.value.email;
+    this.user.self = true;
+    this.user.status = 0;
 
-    //this stores name, email, pic to firebase
+    //this stores user to local storage
+        this.users_local.push(this.user);
+        this.storage.set("users_local", this.users_local); 
+
+    //this stores user to firebase
    this.users.push({
-      name: this.user.userName, email: this.user.userEmail
+      id: this.user.id, name: this.user.name, email: this.user.email, status: this.user.status
     }); 
 
    /*if (this.user.profilePicture != null) {

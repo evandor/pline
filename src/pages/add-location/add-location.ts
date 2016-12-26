@@ -6,6 +6,7 @@ import { LocationService } from '../../providers/location-service';
 import { PlineLocation } from '../../domain/pline-location';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SearchLocationModalPage } from '../search-location-modal/search-location-modal';
+import { UUID } from 'angular2-uuid';
 
 declare var google;
 
@@ -44,6 +45,7 @@ export class AddLocationPage implements OnInit {
     this.storage.get("places").then((places) => {
       this.location.name = this.addLocationFormGroup.value.locationname;
       this.location.address = this.addLocationFormGroup.value.address;
+      this.location.id= UUID.UUID();
       places.push(this.location);
       this.storage.set("places", places);
       this.navCtrl.pop();
@@ -62,7 +64,6 @@ export class AddLocationPage implements OnInit {
         this.latLng = searchResult.geometry.location;
         this.addLocationMap.setCenter(this.latLng);
         this.createMapMaker(searchResult);
-        console.log("Our new location", this.location);
 
       }
     });

@@ -46,13 +46,13 @@ export class TrackingService {
                                 } else {
                                     console.log("checking in at place #" + i);
                                     ctx.locationMatches.push(places[i]);
-                                    resolve(this.createMessage("checking in at place #" + i));
+                                    resolve(this.createMessage());
                                 }
                             } else {
                                 if (ctx.locationMatches.indexOf(places[i]) > -1) {
                                     console.log("checking out from place #" + i);
                                     ctx.locationMatches.splice(ctx.locationMatches.indexOf(places[i]), 0);
-                                    resolve(this.createMessage("checking out from place #" + i));
+                                    resolve(this.createMessage());
                                 } else {
                                     console.log("still not at place #" + i);
                                 }
@@ -68,13 +68,12 @@ export class TrackingService {
     }
 
 
-    private createMessage(text: string): Message { //loc: PlineLocation, type: MessageType): Message {
+    private createMessage(): Message { //loc: PlineLocation, type: MessageType): Message {
         console.log("creating new message...");
         var msg = new Message();
-        msg.text = text;
         msg.timeStamp = new Date().getTime();
         var aUser = new User();
-        aUser.userName = "timerUser2";
+        aUser.name = "timerUser2";
         msg.user = aUser;
         msg.messageType = MessageType.CHECKIN;
         return msg;

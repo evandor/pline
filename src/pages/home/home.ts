@@ -117,6 +117,10 @@ export class HomePage {
     this.navCtrl.push(InviteContactPage);
   }
 
+  openContactsPage(){
+    this.navCtrl.push(ContactsPage);
+  }
+
   public messagesEmpty() {
     return this.messages.length == 0;
 

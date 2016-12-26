@@ -9,7 +9,6 @@ import { User } from './user';
     }
 
 export class Message {
-    text: string = "hallo";
     timeStamp: number; // Unix timestamp in seconds
     location: PlineLocation;
     user: User;

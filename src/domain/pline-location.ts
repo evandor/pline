@@ -1,4 +1,5 @@
 export class PlineLocation {
+    id: string;
     name: string;
     longitude: number;
     latitude: number;

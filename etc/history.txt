@@ -5,6 +5,8 @@ locking orientation to portrait (no landscape) in config.xml:
 npm install --save angular2-moment
 npm install @types/request@0.0.30 --save-dev --save-exact
 npm install firebase angularfire2 --save
+npm install angular2-uuid --save
+
 
 -> geolocation problem?
 

@@ -7,20 +7,20 @@ export enum UserStatus {
     }
 
 export class User{
-
-    userName: string;
+    id: string;
+    name: string;
     //registered but not confirmed user means he can add places and sees self-check-ins/outs, 
     //but no invitations can be sent 
-    userStatus: UserStatus = UserStatus.REGISTERED;
-    userEmail: string;
+    status: UserStatus = UserStatus.REGISTERED;
+    email: string;
     self: boolean = false;
     profilePicture:any;
   
 
     
 
-    constructor (userName?: string, userEmail?: string) {
-        this.userName = userName;
-        this.userEmail = userEmail;
+    constructor (name?: string, email?: string) {
+        this.name = name;
+        this.email = email;
     }
 }
