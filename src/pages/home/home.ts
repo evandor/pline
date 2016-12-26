@@ -9,6 +9,9 @@ import { User } from '../../domain/user';
 import { AddLocationPage } from '../add-location/add-location';
 import { LocationsPage } from '../locations/locations';
 
+import { InviteContactPage } from '../invite-contact/invite-contact';
+import { ContactsPage } from '../contacts/contacts';
+
 import { TrackingService } from '../../providers/tracking-service';
 import { LocationService } from '../../providers/location-service';
 
@@ -108,6 +111,10 @@ export class HomePage {
   
   openLocationsPage(){
     this.navCtrl.push(LocationsPage);
+  }
+
+  openInviteContactPage(){
+    this.navCtrl.push(InviteContactPage);
   }
 
   public messagesEmpty() {

@@ -15,13 +15,17 @@ export class SearchLocationModalPage implements OnInit {
     var input = document.getElementById('pac-input');
     var autoComplete = new google.maps.places.Autocomplete(input);
     var ctx = this;
-    autoComplete.addListener('place_changed', function (v1,v2) {
+    autoComplete.addListener('place_changed', function (v1, v2) {
       var place = this.getPlace();
       console.log(place);
       ctx.viewCtrl.dismiss(place);
     });
 
   }
+
+  // TODO Bias the autocomplete object to the user's geographical location,
+  // as supplied by the browser's 'navigator.geolocation' object.
+
 
   dismiss() {
     this.viewCtrl.dismiss();
