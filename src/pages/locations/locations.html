@@ -18,20 +18,16 @@
   <div *ngIf="!locationsEmpty()">
 
   
+<ion-list>
+      <ion-item *ngFor="let location of locations">
 
-      <ion-row *ngFor="let location of locations">
-
-        <ion-col>
-          {{location?.name}} 
-        </ion-col>
-        <ion-col>
-          {{location?.address}} 
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-only (click)="removeLocation(location)"><ion-icon name="trash"></ion-icon></button>
-        </ion-col>
-      </ion-row>
-
+        
+         <h2> {{location?.name}} </h2>
+         <p> {{location?.address}} </p>
+         <button ion-button color="danger" outline icon-only (click)="removeLocation(location)" small item-right><ion-icon name="trash"></ion-icon></button>
+        
+      </ion-item>
+</ion-list>
    
   </div>
 

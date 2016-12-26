@@ -44,7 +44,6 @@ export class AddLocationPage implements OnInit {
   saveLocation() {
     this.storage.get("places").then((places) => {
       this.location.name = this.addLocationFormGroup.value.locationname;
-      //this.location.address = this.addLocationFormGroup.value.address;
       this.location.id= UUID.UUID();
       places.push(this.location);
       this.storage.set("places", places);

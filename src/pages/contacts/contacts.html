@@ -14,5 +14,21 @@
 
 
 <ion-content padding>
+ <div *ngIf="contactsEmpty()">There are no saved contacts.</div>
+  <div *ngIf="!contactsEmpty()">
 
+  
+
+      <ion-row *ngFor="let contact of contacts">
+
+        <ion-col>
+          {{contact?.name}} 
+        </ion-col>
+        <ion-col>
+          {{contact?.email}} 
+        </ion-col>
+      </ion-row>
+
+   
+  </div>
 </ion-content>

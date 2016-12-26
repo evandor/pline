@@ -1,22 +1,33 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import { User } from '../../domain/user';
+import { Storage } from '@ionic/storage';
+import { InviteContactPage } from '../invite-contact/invite-contact';
 
-/*
-  Generated class for the Contacts page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-contacts',
   templateUrl: 'contacts.html'
 })
 export class ContactsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  contacts: Array<User> = new Array();
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ContactsPage');
+  constructor(public navCtrl: NavController, public storage: Storage) {}
+
+  ionViewDidEnter(){
+      this.storage.get('users_local').then((result) => {
+      this.contacts = result;
+    });
+    
+  }
+
+   public contactsEmpty() {
+    return this.contacts.length <= 1; // the first entry is the self-user set in sign-up page
+  }
+
+  openInviteContactPage(){
+    this.navCtrl.push(InviteContactPage);
   }
 
 }
