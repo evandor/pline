@@ -44,7 +44,7 @@ export class AddLocationPage implements OnInit {
   saveLocation() {
     this.storage.get("places").then((places) => {
       this.location.name = this.addLocationFormGroup.value.locationname;
-      this.location.address = this.addLocationFormGroup.value.address;
+      //this.location.address = this.addLocationFormGroup.value.address;
       this.location.id= UUID.UUID();
       places.push(this.location);
       this.storage.set("places", places);
@@ -87,6 +87,9 @@ export class AddLocationPage implements OnInit {
       this.addLocationMap = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
       ctx.addLocationFormGroup.controls['address'].setValue(currentLoc.address);
+      ctx.location.address=currentLoc.address;
+      ctx.location.latitude=currentLoc.latitude;
+      ctx.location.longitude=currentLoc.longitude;
 
       //add a marker to the map
       let marker = new google.maps.Marker({
