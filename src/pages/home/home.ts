@@ -85,24 +85,27 @@ export class HomePage {
 
     var ctx = this;
 
-    /*_trackingService.register(storage, ctx._locationService).subscribe(
+    _trackingService.register(storage, ctx._locationService).subscribe(
       function (messagePromise: Promise<Message>) { 
         messagePromise.then((msg) => {
           console.log(msg);
+          ctx.messages.push(msg);
+        }).catch((error) => {
+          console.log('onError: %s', error); 
         });
       },
-      function (e) { console.log('onError: %s', e); },
+      function (e) { 
+        console.log('onError: %s', e); 
+      },
       function () {
         console.log('onCompleted');
       }
-    );*/
+    );
     
   }
 
   ngOnInit() {
-
     this.loadMap();
-
   }
 
   openAddLocationPage(){

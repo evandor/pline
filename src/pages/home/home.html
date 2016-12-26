@@ -69,10 +69,12 @@
       <ion-col text-left width-50> 
           {{message?.user.name}}
        <span [ngSwitch]="message?.messageType">
-        <span *ngSwitchCase="0">arrived at</span>
+        <span *ngSwitchCase="0">arrived @</span>
         <span *ngSwitchCase="1">left</span>
+        <span *ngSwitchCase="2">is still @</span>
+        <span *ngSwitchCase="3">is not @</span>
       </span>
-         {{message?.location.name}}
+         {{message?.location?.name}}
       </ion-col>
       <ion-col>
          {{message?.timeStamp|timestampPipe}}

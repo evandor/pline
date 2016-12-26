@@ -20,7 +20,7 @@ export class MyApp {
       // IntroPage should be the rootPage only at first launch of the app, afterwords TabsPage is set as rootPage.
       //For development reasons the "remove"-toggle is set in if-clause     
       this.storage.get('introShown').then((result) => {
-
+        console.log("result", result);
         if (result) {
           //this.storage.remove ('introShown');
           this.rootPage = HomePage;
