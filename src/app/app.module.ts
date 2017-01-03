@@ -9,20 +9,12 @@ import { AddLocationPage } from '../pages/add-location/add-location';
 import { SearchLocationModalPage } from '../pages/search-location-modal/search-location-modal';
 import { ContactsPage } from '../pages/contacts/contacts';
 import { InviteContactPage } from '../pages/invite-contact/invite-contact';
+import { LoginPage } from '../pages/login/login';
 
 import { Storage } from '@ionic/storage';
 import { LocationService } from '../providers/location-service';
 import {TimestampPipe} from '../pipes/timestamp-pipe';
-// Import the AF2 Module
-import { AngularFireModule } from 'angularfire2';
-// AF2 Settings
-export const firebaseConfig = {
-  apiKey: "AIzaSyDICkKdSMNgbcMfxYgJVYVsGN8Qb1XFWZk",
-  authDomain: "pline-145318.firebaseapp.com",
-  databaseURL: "https://pline-145318.firebaseio.com",
-  storageBucket: "pline-145318.appspot.com",
-  messagingSenderId: "1025531799456"
-};
+
 
 @NgModule({
   declarations: [
@@ -35,12 +27,13 @@ export const firebaseConfig = {
     SearchLocationModalPage,
     ContactsPage,
     InviteContactPage,
-    TimestampPipe
+    TimestampPipe,
+    LoginPage
 
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
-     AngularFireModule.initializeApp(firebaseConfig)
+    IonicModule.forRoot(MyApp)
+     
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,7 +45,8 @@ export const firebaseConfig = {
     AddLocationPage,
     SearchLocationModalPage,
     ContactsPage,
-    InviteContactPage
+    InviteContactPage,
+    LoginPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage, LocationService]
 })

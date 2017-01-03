@@ -15,6 +15,7 @@ export class User{
     email: string;
     self: boolean = false;
     profilePicture:any;
+    password:string;
   
 
     

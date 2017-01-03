@@ -4,30 +4,40 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
 import { IntroPage } from '../pages/intro/intro';
-import { Storage } from '@ionic/storage';
+
+
+
+
+
+import firebase from 'firebase';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDICkKdSMNgbcMfxYgJVYVsGN8Qb1XFWZk",
+  authDomain: "pline-145318.firebaseapp.com",
+  databaseURL: "https://pline-145318.firebaseio.com",
+  storageBucket: "pline-145318.appspot.com",
+  messagingSenderId: "1025531799456"
+};
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = IntroPage;
+  rootPage:any = HomePage;
 
-  constructor(platform: Platform, public storage: Storage) {
+  constructor(platform: Platform) {
+
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged( user => {
+      if (!user) {
+        this.rootPage = IntroPage;
+        console.log("There's not a logged in user!");
+      }
+});
     platform.ready().then(() => {
       
-      
-      // IntroPage should be the rootPage only at first launch of the app, afterwords TabsPage is set as rootPage.
-      //For development reasons the "remove"-toggle is set in if-clause     
-      this.storage.get('introShown').then((result) => {
-        console.log("result", result);
-        if (result) {
-          //this.storage.remove ('introShown');
-          this.rootPage = HomePage;
-        } else {
-          this.rootPage = IntroPage;
-        };
-
         StatusBar.styleDefault();
         Splashscreen.hide();
 

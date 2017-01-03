@@ -7,6 +7,9 @@ import { User } from '../../domain/user';
 import { Camera } from 'ionic-native';
 import { HomePage } from '../home/home';
 import { UUID } from 'angular2-uuid';
+import { EmailValidator } from '../../validators/email';
+
+import firebase from 'firebase';
 
 
 
@@ -23,54 +26,65 @@ export class SignUpPage {
   users_local: Array<User> = new Array();
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     angFire: AngularFire,
     public storage: Storage,
     private formBuilder: FormBuilder,
-    public alertCtrl: AlertController,) {
+    public alertCtrl: AlertController, ) {
 
-      this.users = angFire.database.list('/users');
-      //this.profilePictureRef = firebase.storage().ref('/userProfilePics/');
+    this.users = angFire.database.list('/users');
+    //this.profilePictureRef = firebase.storage().ref('/userProfilePics/');
 
 
-      this.registerFormGroup = this.formBuilder.group({
+    this.registerFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
 
-    }
+  }
 
-  register(){
+  register() {
 
     this.user.id = UUID.UUID();
     this.user.name = this.registerFormGroup.value.name;
     this.user.email = this.registerFormGroup.value.email;
+    this.user.password = this.registerFormGroup.value.password;
     this.user.self = true;
     this.user.status = 0;
 
     //this stores user to local storage
-        this.users_local.push(this.user);
-        this.storage.set("users_local", this.users_local); 
+    this.users_local.push(this.user);
+    this.storage.set("users_local", this.users_local);
+
+    //this creates user in firebase auth
+    firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.name;
+      var errorMessage = error.message;
+ 
+      // ...
+    });
 
     //this stores user to firebase
-   this.users.push({
+    this.users.push({
       id: this.user.id, name: this.user.name, email: this.user.email, status: this.user.status
-    }); 
+    });
 
-   /*if (this.user.profilePicture != null) {
-      this.profilePictureRef.child(this.user.userEmail).child('profilePicture.png')
-        .putString(this.user.profilePicture, 'base64', { contentType: 'image/png' })
-        .then((savedPicture) => {
-          console.log("This is the image URL " + savedPicture.downloadURL);
-        });
-    }*/
+    /*if (this.user.profilePicture != null) {
+       this.profilePictureRef.child(this.user.userEmail).child('profilePicture.png')
+         .putString(this.user.profilePicture, 'base64', { contentType: 'image/png' })
+         .then((savedPicture) => {
+           console.log("This is the image URL " + savedPicture.downloadURL);
+         });
+     }*/
 
     //this is set to show proper root page on next start via app.component.ts
     this.storage.set("introShown", true);
     this.showConfirmationAlert();
   }
 
-  showConfirmationAlert(){
+  showConfirmationAlert() {
 
     let alert = this.alertCtrl.create({
       title: "Please confirm it's you",
@@ -89,7 +103,7 @@ export class SignUpPage {
 
   }
 
-  getProfilePicture(){
+  getProfilePicture() {
 
     Camera.getPicture({
       destinationType: Camera.DestinationType.DATA_URL,
