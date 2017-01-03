@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
+import { ResetPasswordPage } from '../reset-password/reset-password';
 import { HomePage } from '../home/home';
 import { EmailValidator } from '../../validators/email';
-import firebase from 'firebase';
+import { AuthService } from '../../providers/auth-service';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class LoginPage {
   submitAttempt: boolean = false;
   loading: any;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
+    public authService: AuthService,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController) {
@@ -35,17 +38,17 @@ export class LoginPage {
     this[field + "Changed"] = true;
   }
 
-  loginUser() {
+loginUser(){
 
     this.submitAttempt = true;
 
-    if (!this.loginForm.valid) {
+    if (!this.loginForm.valid){
       console.log(this.loginForm.value);
     } else {
-      firebase.auth().signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password).then(authData => {
+      this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authService => {
         this.navCtrl.setRoot(HomePage);
       }, error => {
-        this.loading.dismiss().then(() => {
+        this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({
             message: error.message,
             buttons: [
@@ -55,7 +58,7 @@ export class LoginPage {
               }
             ]
           });
-          alert.present();
+          alert.present();          
         });
       });
 
@@ -64,19 +67,14 @@ export class LoginPage {
       });
       this.loading.present();
     }
-  }
+}
 
   goToSignup() {
     this.navCtrl.push(SignUpPage);
   }
 
-  /*goToResetPassword() {
+  goToResetPassword() {
     this.navCtrl.push(ResetPasswordPage);
-  }*/
-
-
-
-
-
+  }
 
 }

@@ -35,7 +35,7 @@ export class TrackingService {
         this.storage = storage;
 
         var ctx = this;
-        return Observable.timer(1000, 60000).map((x) => {
+        return Observable.timer(1000, 300000).map((x) => {
             console.log("invocation " + x);
             return new Promise<Message>((resolve, reject) => {
                 locationService.getCurrentPlineLocation().then((currentLoc) => {

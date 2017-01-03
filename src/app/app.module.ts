@@ -10,9 +10,11 @@ import { SearchLocationModalPage } from '../pages/search-location-modal/search-l
 import { ContactsPage } from '../pages/contacts/contacts';
 import { InviteContactPage } from '../pages/invite-contact/invite-contact';
 import { LoginPage } from '../pages/login/login';
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 
 import { Storage } from '@ionic/storage';
 import { LocationService } from '../providers/location-service';
+import { AuthService } from '../providers/auth-service';
 import {TimestampPipe} from '../pipes/timestamp-pipe';
 
 
@@ -28,7 +30,8 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
     ContactsPage,
     InviteContactPage,
     TimestampPipe,
-    LoginPage
+    LoginPage,
+    ResetPasswordPage
 
   ],
   imports: [
@@ -46,8 +49,9 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
     SearchLocationModalPage,
     ContactsPage,
     InviteContactPage,
-    LoginPage
+    LoginPage,
+    ResetPasswordPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage, LocationService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage, LocationService, AuthService]
 })
 export class AppModule {}

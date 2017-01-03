@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { User } from '../../domain/user';
 import { Camera } from 'ionic-native';
 import { HomePage } from '../home/home';
 import { EmailValidator } from '../../validators/email';
+import { AuthService } from '../../providers/auth-service';
 import firebase from 'firebase';
 
 @Component({
@@ -15,10 +16,16 @@ export class SignUpPage {
 
   registerFormGroup: FormGroup;
   profilePicture:any;
+  emailChanged: boolean = false;
+  passwordChanged: boolean = false;
+  submitAttempt: boolean = false;
+  loading: any;
 
   constructor(
     public navCtrl: NavController,
+    public authService: AuthService,
     private formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController,
     public alertCtrl: AlertController, ) {
 
     this.registerFormGroup = this.formBuilder.group({
@@ -27,33 +34,56 @@ export class SignUpPage {
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
 
+    
+
   }
 
-  register() {    
-    var ctx=this;
-    //this creates user in firebase auth
-    firebase.auth().createUserWithEmailAndPassword(ctx.registerFormGroup.value.email,ctx.registerFormGroup.value.password)
-      .then((user) => {
-        user.updateProfile({
-          displayName: ctx.registerFormGroup.value.name,
-          photoURL: "https://example.com/jane-q-user/profile.jpg"
-        }).then(function () {
-        }, function (error) {
-        });
-        user.sendEmailVerification().then(function () {
-           ctx.showConfirmationAlert();
-        }, function (error) {
-          // An error happened.
-        });
-      })
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.name;
-        var errorMessage = error.message;
-
-        // ...
-      });   
+  /**
+   * Receives an input field and sets the corresponding fieldChanged property to 'true' to help with the styles.
+   */
+  elementChanged(input){
+    let field = input.inputControl.name;
+    this[field + "Changed"] = true;
   }
+
+  /**
+   * If the form is valid it will call the AuthData service to sign the user up password displaying a loading
+   *  component while the user waits.
+   *
+   * If the form is invalid it will just log the form value, feel free to handle that as you like.
+   */
+  signupUser(){
+    this.submitAttempt = true;
+
+    if (!this.registerFormGroup.valid){
+      console.log(this.registerFormGroup.value);
+    } else {
+      this.authService.signupUser(this.registerFormGroup.value.name, this.registerFormGroup.value.email, this.registerFormGroup.value.password).then(() => {
+        this.showConfirmationAlert();
+      }, (error) => {
+        this.loading.dismiss().then( () => {
+          var errorMessage: string = error.message;
+          let alert = this.alertCtrl.create({
+            message: errorMessage,
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
+        });
+      });
+
+      this.loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+      });
+      this.loading.present();
+    }
+}
+
+  
 
   showConfirmationAlert() {
     let alert = this.alertCtrl.create({
