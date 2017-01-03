@@ -18,11 +18,7 @@ export class TrackingService {
     constructor(private storage: Storage) {
         console.log("Tracking Service constructor...");
         this.storage.get("users_local").then((users) => {
-<<<<<<< Updated upstream
-            if(users==null){
-=======
             if (users == null) {
->>>>>>> Stashed changes
                 return;
             }
             for(var i=0;i<users.length;i++) {

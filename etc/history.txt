@@ -40,3 +40,18 @@ ios-deploy version: 1.9.0
 ios-sim version: 5.0.10 
 Node Version: v6.9.1
 Xcode version: Xcode 8.1 Build version 8B62
+
+
+Sample code how you can create a folder with some data in firebase 
+==================================================================
+    users:any;
+    this.users = firebase.database().ref('/someFolder/'); //put in constructor
+    this.users.push({
+      id: this.user.id, name: this.user.name, email: this.user.email, status: this.user.status
+    });
+    if (this.user.profilePicture != null) {
+       this.profilePictureRef.child(this.user.userEmail).child('profilePicture.png')
+         .putString(this.user.profilePicture, 'base64', { contentType: 'image/png' })
+         .then((savedPicture) => {
+           console.log("This is the image URL " + savedPicture.downloadURL);
+    });
