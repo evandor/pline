@@ -57,18 +57,27 @@ export class SignUpPage {
     this.storage.set("users_local", this.users_local);
 
     //this creates user in firebase auth
-    firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password).catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.name;
-      var errorMessage = error.message;
- 
-      // ...
-    });
+    firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
+      .then((user) => {
+        user.updateProfile({
+          displayName: this.user.name,
+          photoURL: "https://example.com/jane-q-user/profile.jpg"
+        }).then(function () {
+        }, function (error) {
+        });
+      })
+      .catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.name;
+        var errorMessage = error.message;
+
+        // ...
+      });
 
     //this stores user to firebase
-    this.users.push({
+    /*this.users.push({
       id: this.user.id, name: this.user.name, email: this.user.email, status: this.user.status
-    });
+    });*/
 
     /*if (this.user.profilePicture != null) {
        this.profilePictureRef.child(this.user.userEmail).child('profilePicture.png')

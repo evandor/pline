@@ -6,9 +6,6 @@ import { HomePage } from '../pages/home/home';
 import { IntroPage } from '../pages/intro/intro';
 
 
-
-
-
 import firebase from 'firebase';
 
 export const firebaseConfig = {
@@ -37,7 +34,6 @@ export class MyApp {
       }
     });
     platform.ready().then(() => {
-
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
