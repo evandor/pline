@@ -24,28 +24,22 @@ export const firebaseConfig = {
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage: any = HomePage;
 
   constructor(platform: Platform) {
 
     firebase.initializeApp(firebaseConfig);
 
-    firebase.auth().onAuthStateChanged( user => {
+    firebase.auth().onAuthStateChanged(user => {
       if (!user) {
         this.rootPage = IntroPage;
         console.log("There's not a logged in user!");
       }
-});
-    platform.ready().then(() => {
-      
-        StatusBar.styleDefault();
-        Splashscreen.hide();
-
-      });
-
-
-
-
     });
-  }
+    platform.ready().then(() => {
+
+      StatusBar.styleDefault();
+      Splashscreen.hide();
+    });
+  };
 }

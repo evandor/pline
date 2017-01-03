@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { User } from '../../domain/user';
@@ -19,7 +18,7 @@ import firebase from 'firebase';
 })
 export class SignUpPage {
 
-  users: FirebaseListObservable<any>;
+  users:any;
   registerFormGroup: FormGroup;
   profilePictureRef: any;
   user = new User();
@@ -27,12 +26,12 @@ export class SignUpPage {
 
   constructor(
     public navCtrl: NavController,
-    angFire: AngularFire,
     public storage: Storage,
     private formBuilder: FormBuilder,
     public alertCtrl: AlertController, ) {
 
-    this.users = angFire.database.list('/users');
+    this.users = firebase.database().ref('/someFolder/');
+    //angFire.database.list('/users');
     //this.profilePictureRef = firebase.storage().ref('/userProfilePics/');
 
 
@@ -79,8 +78,6 @@ export class SignUpPage {
          });
      }*/
 
-    //this is set to show proper root page on next start via app.component.ts
-    this.storage.set("introShown", true);
     this.showConfirmationAlert();
   }
 

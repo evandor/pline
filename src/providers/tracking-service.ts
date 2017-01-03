@@ -18,6 +18,9 @@ export class TrackingService {
     constructor(private storage: Storage) {
         console.log("Tracking Service constructor...");
         this.storage.get("users_local").then((users) => {
+            if(users==null){
+                return;
+            }
             for(var i=0;i<users.length;i++) {
                 if (users[i].self) {
                     this.currentUser.name = users[i].name;
