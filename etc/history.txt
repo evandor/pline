@@ -13,3 +13,30 @@ npm install angular2-uuid --save
 ionic plugin add cordova-plugin-geolocation --save
 ionic platform rm ios
 ionic platform add ios
+
+check cli version available (latest) at: https://www.npmjs.com/search?q=ionic
+
+Updating
+--------
+
+Ionic cli: 
+
+  npm uninstall -g ionic
+  npm install -g ionic
+
+Scripts:
+
+  npm install @ionic/app-scripts@latest --save-dev
+
+Components:
+-----------
+
+Cordova CLI:  => ??? 6.4.0 
+Ionic Framework Version: => ??? 2.0.0-rc.4
+Ionic CLI => https://github.com/driftyco/ionic-cli/releases 2.1.8
+Ionic App Lib Version: 2.1.9
+Ionic App Scripts Version: 0.0.47
+ios-deploy version: 1.9.0 
+ios-sim version: 5.0.10 
+Node Version: v6.9.1
+Xcode version: Xcode 8.1 Build version 8B62
