@@ -1,11 +1,6 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
     <ion-title>Sign Up</ion-title>
-    <ion-buttons end>
-      <button ion-button type="submit" [disabled]="!registerFormGroup.valid" (click)="signupUser()">
-        Done
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -23,7 +18,7 @@
   </ion-row>
   <ion-row>
     <ion-col>
-    <form [formGroup]="registerFormGroup" (ngSubmit)="register()">
+    <form [formGroup]="registerFormGroup" (ngSubmit)="signupUser()">
       <ion-item>
         <ion-label>Your name</ion-label>
         <ion-input type="text" formControlName="name"></ion-input>
@@ -36,6 +31,9 @@
         <ion-label>Your Password</ion-label>
         <ion-input type="text" formControlName="password"></ion-input>
       </ion-item>
+      <button ion-button type="submit" [disabled]="!registerFormGroup.valid" full>
+        Done
+      </button>
     </form>
   </ion-col>
 </ion-row>

@@ -13,7 +13,7 @@ export class AuthService {
     this.fireAuth = firebase.auth(); // We are creating an auth reference.
     // This declares a database reference for the userProfile/ node.
     this.userProfile = firebase.database().ref('/userProfile');
-    
+
   }
 
   /**
@@ -33,13 +33,21 @@ export class AuthService {
    * @param  {string} email    [User's email address]
    * @param  {string} password [User's password]
    */
-  signupUser(name:string, email: string, password: string): any {
-   
+  signupUser(name: string, email: string, password: string): any {
+
     return this.fireAuth.createUserWithEmailAndPassword(email, password).then((newUser) => {
-      
+
+      newUser.updateProfile({
+        displayName: name
+      }).then(function () {
+        // Update successful.
+      }, function (error) {
+        // An error happened.
+      });
+
       this.userProfile.child(newUser.uid).set({
-          email: email,
-          name: name
+        email: email,
+        name: name
       });
       newUser.sendEmailVerification();
     });
@@ -61,6 +69,10 @@ export class AuthService {
    */
   logoutUser(): any {
     return this.fireAuth.signOut();
+  }
+
+  confirmedUser():any{
+    return this.fireAuth.currentUser.emailVerified;
   }
 
 }

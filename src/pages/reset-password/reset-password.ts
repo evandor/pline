@@ -16,7 +16,7 @@ export class ResetPasswordPage {
 
 
   constructor(
-    public authService: AuthService, 
+    public _authService: AuthService, 
     public formBuilder: FormBuilder, 
     public navCtrl: NavController,
     public loadingCtrl: LoadingController, 
@@ -48,7 +48,7 @@ export class ResetPasswordPage {
     if (!this.resetPasswordForm.valid){
       console.log(this.resetPasswordForm.value);
     } else {
-      this.authService.resetPassword(this.resetPasswordForm.value.email).then((user) => {
+      this._authService.resetPassword(this.resetPasswordForm.value.email).then((user) => {
         let alert = this.alertCtrl.create({
           message: "We just sent you a reset link to your email",
           buttons: [

@@ -16,6 +16,16 @@ ionic platform add ios
 
 check cli version available (latest) at: https://www.npmjs.com/search?q=ionic
 
+
+https://ionicframework.com/docs/v2/native/social-sharing/
+ionic plugin add cordova-plugin-x-socialsharing
+
+http://blog.ionic.io/deeplinking-in-ionic-apps/
+cordova plugin add ionic-plugin-deeplinks --variable URL_SCHEME=pline --variable DEEPLINK_SCHEME=https --variable DEEPLINK_HOST=pline.one
+https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html
+
+
+
 Updating
 --------
 

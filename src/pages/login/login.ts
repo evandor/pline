@@ -22,7 +22,7 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public authService: AuthService,
+    public _authService: AuthService,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController) {
@@ -45,7 +45,7 @@ loginUser(){
     if (!this.loginForm.valid){
       console.log(this.loginForm.value);
     } else {
-      this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authService => {
+      this._authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authService => {
         this.navCtrl.setRoot(HomePage);
       }, error => {
         this.loading.dismiss().then( () => {

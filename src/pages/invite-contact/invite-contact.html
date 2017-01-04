@@ -10,4 +10,15 @@
 
 <ion-content padding>
 
+ <p>Invite friends and family to follow you!</p>
+
+
+
+<form [formGroup]="inviteFormGroup" (ngSubmit)="inviteContact()">
+      <ion-item>
+        <ion-input type="text" placeholder="email to share with" formControlName="email"></ion-input>
+      </ion-item>
+<button ion-button type="submit" [disabled]="!inviteFormGroup.valid" full>Send Invitation</button>
+</form>
+
 </ion-content>

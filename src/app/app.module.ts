@@ -11,10 +11,12 @@ import { ContactsPage } from '../pages/contacts/contacts';
 import { InviteContactPage } from '../pages/invite-contact/invite-contact';
 import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
+import { ReviewInvitationPage } from '../pages/review-invitation/review-invitation';
 
 import { Storage } from '@ionic/storage';
 import { LocationService } from '../providers/location-service';
 import { AuthService } from '../providers/auth-service';
+import { InvitationService } from '../providers/invitation-service';
 import {TimestampPipe} from '../pipes/timestamp-pipe';
 
 
@@ -31,7 +33,8 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
     InviteContactPage,
     TimestampPipe,
     LoginPage,
-    ResetPasswordPage
+    ResetPasswordPage,
+    ReviewInvitationPage
 
   ],
   imports: [
@@ -50,8 +53,9 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
     ContactsPage,
     InviteContactPage,
     LoginPage,
-    ResetPasswordPage
+    ResetPasswordPage,
+    ReviewInvitationPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage, LocationService, AuthService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage, LocationService, AuthService, InvitationService]
 })
 export class AppModule {}

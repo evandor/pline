@@ -6,7 +6,6 @@ import { Camera } from 'ionic-native';
 import { HomePage } from '../home/home';
 import { EmailValidator } from '../../validators/email';
 import { AuthService } from '../../providers/auth-service';
-import firebase from 'firebase';
 
 @Component({
   selector: 'page-sign-up',
@@ -15,7 +14,7 @@ import firebase from 'firebase';
 export class SignUpPage {
 
   registerFormGroup: FormGroup;
-  profilePicture:any;
+  profilePicture: any;
   emailChanged: boolean = false;
   passwordChanged: boolean = false;
   submitAttempt: boolean = false;
@@ -23,25 +22,22 @@ export class SignUpPage {
 
   constructor(
     public navCtrl: NavController,
-    public authService: AuthService,
+    public _authService: AuthService,
     private formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController, ) {
+    public alertCtrl: AlertController) {
 
     this.registerFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
-
-    
-
   }
 
   /**
    * Receives an input field and sets the corresponding fieldChanged property to 'true' to help with the styles.
    */
-  elementChanged(input){
+  elementChanged(input) {
     let field = input.inputControl.name;
     this[field + "Changed"] = true;
   }
@@ -52,16 +48,16 @@ export class SignUpPage {
    *
    * If the form is invalid it will just log the form value, feel free to handle that as you like.
    */
-  signupUser(){
+  signupUser() {
     this.submitAttempt = true;
 
-    if (!this.registerFormGroup.valid){
+    if (!this.registerFormGroup.valid) {
       console.log(this.registerFormGroup.value);
     } else {
-      this.authService.signupUser(this.registerFormGroup.value.name, this.registerFormGroup.value.email, this.registerFormGroup.value.password).then(() => {
+      this._authService.signupUser(this.registerFormGroup.value.name, this.registerFormGroup.value.email, this.registerFormGroup.value.password).then(() => {
         this.showConfirmationAlert();
       }, (error) => {
-        this.loading.dismiss().then( () => {
+        this.loading.dismiss().then(() => {
           var errorMessage: string = error.message;
           let alert = this.alertCtrl.create({
             message: errorMessage,
@@ -81,9 +77,9 @@ export class SignUpPage {
       });
       this.loading.present();
     }
-}
+  }
 
-  
+
 
   showConfirmationAlert() {
     let alert = this.alertCtrl.create({

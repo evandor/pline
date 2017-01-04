@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Platform, Nav, NavController } from 'ionic-angular';
+import { StatusBar, Splashscreen, Deeplinks } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
 import { IntroPage } from '../pages/intro/intro';
+import { ReviewInvitationPage } from '../pages/review-invitation/review-invitation';
 
 
 import firebase from 'firebase';
+import {ViewChild} from '@angular/core';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDICkKdSMNgbcMfxYgJVYVsGN8Qb1XFWZk",
@@ -22,8 +24,10 @@ export const firebaseConfig = {
 })
 export class MyApp {
   rootPage: any = HomePage;
+  
+   @ViewChild(Nav) navChild:Nav;
 
-  constructor(platform: Platform) {
+  constructor(private platform: Platform) {
 
     firebase.initializeApp(firebaseConfig);
 
@@ -33,9 +37,25 @@ export class MyApp {
         console.log("There's not a logged in user!");
       }
     });
-    platform.ready().then(() => {
+      platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
-  };
+  }
+
+  
+  ngAfterViewInit() {
+      this.platform.ready().then(() => {
+      Deeplinks.routeWithNavController(this.navChild, {
+        '/review-invitation': ReviewInvitationPage
+      }).subscribe((match) => {
+        
+         var args=match.$args;
+         var link=match.$link;
+        console.log('Successfully routed', match);
+      }, (nomatch) => {
+        console.warn('Unmatched Route', nomatch);
+      });
+    })
+}
 }

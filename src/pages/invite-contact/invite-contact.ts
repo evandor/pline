@@ -1,22 +1,60 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { EmailValidator } from '../../validators/email';
+import { InvitationService } from '../../providers/invitation-service';
+import { AuthService } from '../../providers/auth-service';
 
-/*
-  Generated class for the InviteContact page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-invite-contact',
   templateUrl: 'invite-contact.html'
 })
 export class InviteContactPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  inviteFormGroup: FormGroup;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InviteContactPage');
+
+  constructor(
+    public navCtrl: NavController,
+    private formBuilder: FormBuilder,
+    public alertCtrl: AlertController,
+    public _invitationService: InvitationService,
+    public _authService: AuthService) {
+
+    this.inviteFormGroup = this.formBuilder.group({
+      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])]
+    });
+  }
+
+
+  inviteContact() {
+    
+    var confirmed=this._authService.confirmedUser();
+
+    this._invitationService.sendInvitation(this.inviteFormGroup.value.email).then(() => {
+      this.showInvitationSentAlert();
+    }, (error) => {
+      alert("send failed");
+    });
+
+
+  }
+
+
+  showInvitationSentAlert() {
+    let alert = this.alertCtrl.create({
+      subTitle: "Great, your invite has been sent.<br>Enjoy using pline!",
+      buttons: [
+        {
+          text: "Great!",
+          handler: () => {
+            console.log('OK clicked');
+          }
+        }]
+
+    });
+    alert.present();
   }
 
 }
