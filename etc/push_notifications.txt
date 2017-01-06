@@ -1,0 +1,11 @@
+=== Push Notifications ========================
+
+http://docs.ionic.io/services/push/
+http://docs.ionic.io/setup.html#installation
+http://docs.ionic.io/services/profiles/#ios-push-certificate
+
+  npm install @ionic/cloud-angular --save
+  ionic io init
+    
+  cordova plugin add phonegap-plugin-push --variable SENDER_ID=<sender id from https://console.firebase.google.com/project/pline-145318/settings/cloudmessaging> --save
+

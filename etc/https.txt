@@ -1,0 +1,5 @@
+https://letsencrypt.org/getting-started/
+
+https://certbot.eff.org/#debianjessie-apache
+
+certbot --apache

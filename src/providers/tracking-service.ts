@@ -7,6 +7,13 @@ import { PlineLocation } from '../domain/pline-location';
 import { User } from '../domain/user';
 import { LocationService } from './location-service';
 
+// push functionality to be moved to service of its own
+import { Component } from '@angular/core';
+import {
+    Push,
+    PushToken
+} from '@ionic/cloud-angular';
+
 declare var google;
 
 @Injectable()
@@ -15,19 +22,32 @@ export class TrackingService {
     locationMatches: Array<PlineLocation> = new Array();
     currentUser = new User();
 
-    constructor(private storage: Storage) {
+    constructor(private storage: Storage, private push: Push) {
         console.log("Tracking Service constructor...");
         this.storage.get("users_local").then((users) => {
             if (users == null) {
                 return;
             }
-            for(var i=0;i<users.length;i++) {
+            for (var i = 0; i < users.length; i++) {
                 if (users[i].self) {
                     this.currentUser.name = users[i].name;
                 }
             }
         });
         console.log("Current users set to", this.currentUser);
+
+        // todo: move to "after login()", see http://docs.ionic.io/services/push/ "Registering device tokens"
+        this.push.register().then((t: PushToken) => {
+            console.log("PUSH", t);
+            return this.push.saveToken(t);
+        }).then((t: PushToken) => {
+            console.log('Token saved:', t.token);
+        });
+
+        this.push.rx.notification()
+            .subscribe((msg) => {
+                alert(msg.title + ': ' + msg.text);
+            });
     }
 
     public register(storage: Storage, locationService: LocationService): Observable<Promise<Message>> {
@@ -82,7 +102,7 @@ export class TrackingService {
         });
     }
 
-    private createMessage(location: PlineLocation, type: MessageType): Message { 
+    private createMessage(location: PlineLocation, type: MessageType): Message {
         var msg = new Message();
         msg.timeStamp = new Date().getTime() / 1000;
         msg.user = this.currentUser;

@@ -19,6 +19,25 @@ import { AuthService } from '../providers/auth-service';
 import { InvitationService } from '../providers/invitation-service';
 import {TimestampPipe} from '../pipes/timestamp-pipe';
 
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '113b8df6'
+  },
+  'push': {
+    'sender_id': '1025531799456',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434'
+      }
+    }
+  }
+};
 
 @NgModule({
   declarations: [
@@ -38,8 +57,8 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
 
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
-     
+    IonicModule.forRoot(MyApp),
+    CloudModule.forRoot(cloudSettings)     
   ],
   bootstrap: [IonicApp],
   entryComponents: [
