@@ -43,11 +43,11 @@ export class InvitationService {
   }
 
   saveFollower() {
-
+    console.log("Inside save follower");
     var newFollowerRef = this.followersRef.push();
+    console.log("Inside save follower"+newFollowerRef+this.inviteeEmail);
     newFollowerRef.set({
-      'invitationEmail': this.inviteeEmail,
-      'invitationDate':new Date().getDate
+      'invitationEmail': this.inviteeEmail
      
     });
 
