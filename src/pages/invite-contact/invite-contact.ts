@@ -28,14 +28,9 @@ export class InviteContactPage {
     
   }
 
-  accountConfirmed() {
-    console.log("AccountConfirmed is", this._authService.confirmedUser() );
-    return this._authService.confirmedUser();
-  }
   
-  inviteContact() {
-
-   
+  
+  inviteContact() { 
       this._invitationService.sendInvitation(this.inviteFormGroup.value.email).then(() => {
         this.showInvitationSentAlert();
         this.navCtrl.pop();
@@ -45,16 +40,6 @@ export class InviteContactPage {
     
 
   }
-
-  resendConfirmationEmail(){
-    this._authService.confirmAccount().then(() => {
-        this.showConfirmationAlert();
-        this.navCtrl.pop();
-      }, (error) => {
-        alert("send failed");
-      });
-  }
-
 
   showInvitationSentAlert() {
     let alert = this.alertCtrl.create({
@@ -70,7 +55,7 @@ export class InviteContactPage {
     });
     alert.present();
   }
-
+  
   showConfirmationAlert() {
     let alert = this.alertCtrl.create({
       subTitle: "Great, just click the email link we've sent you",

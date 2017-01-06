@@ -8,17 +8,7 @@
 
 
 <ion-content padding>
-
   
-
-
-  <template [ngIf]="!accountConfirmed()">
-    <ion-note color="danger">
-     Check your emails and confirm your pline account <br>
-     in order to send invitations!<br></ion-note>
-    <button ion-button type="submit" (click)="resendConfirmationEmail()" full>Resend Confirmation Email</button>
-  </template>
-  <template [ngIf]="!!accountConfirmed()">
     <p>Invite friends and family to follow you!</p>
     <form [formGroup]="inviteFormGroup" (ngSubmit)="inviteContact()">
       <ion-item>
@@ -26,5 +16,5 @@
       </ion-item>
       <button ion-button type="submit" [disabled]="!inviteFormGroup.valid" full>Send Invitation</button>
     </form>
-  </template>
+  
 </ion-content>

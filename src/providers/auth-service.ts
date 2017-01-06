@@ -56,6 +56,7 @@ export class AuthService {
   }
 
   confirmAccount(): any {
+ 
     return this.fireAuth.currentUser.sendEmailVerification();
   }
 
@@ -79,6 +80,10 @@ export class AuthService {
 
   confirmedUser(): any {
     return this.fireAuth.currentUser.emailVerified;
+  }
+
+  reloadUser():any{
+      return this.fireAuth.currentUser.reload();
   }
 
 }
