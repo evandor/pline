@@ -14,7 +14,6 @@ export class InviteContactPage {
 
   inviteFormGroup: FormGroup;
 
-
   constructor(
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
@@ -25,20 +24,35 @@ export class InviteContactPage {
     this.inviteFormGroup = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])]
     });
+
+    
   }
 
-
+  accountConfirmed() {
+    console.log("AccountConfirmed is", this._authService.confirmedUser() );
+    return this._authService.confirmedUser();
+  }
+  
   inviteContact() {
+
+   
+      this._invitationService.sendInvitation(this.inviteFormGroup.value.email).then(() => {
+        this.showInvitationSentAlert();
+        this.navCtrl.pop();
+      }, (error) => {
+        alert("send failed");
+      });
     
-    var confirmed=this._authService.confirmedUser();
 
-    this._invitationService.sendInvitation(this.inviteFormGroup.value.email).then(() => {
-      this.showInvitationSentAlert();
-    }, (error) => {
-      alert("send failed");
-    });
+  }
 
-
+  resendConfirmationEmail(){
+    this._authService.confirmAccount().then(() => {
+        this.showConfirmationAlert();
+        this.navCtrl.pop();
+      }, (error) => {
+        alert("send failed");
+      });
   }
 
 
@@ -48,6 +62,21 @@ export class InviteContactPage {
       buttons: [
         {
           text: "Great!",
+          handler: () => {
+            console.log('OK clicked');
+          }
+        }]
+
+    });
+    alert.present();
+  }
+
+  showConfirmationAlert() {
+    let alert = this.alertCtrl.create({
+      subTitle: "Great, just click the email link we've sent you",
+      buttons: [
+        {
+          text: "OK",
           handler: () => {
             console.log('OK clicked');
           }

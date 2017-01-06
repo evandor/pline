@@ -7,26 +7,32 @@ import firebase from 'firebase';
 @Injectable()
 export class InvitationService {
 
-  recipientEmail: any;
-  public userProfile: any;
+  
+  public inviteeEmail: any;
+  public userProfileRef: any;
+  public currentUserRef: any;
+  public followersRef: any;
+  user: any;
 
   constructor() {
-    this.userProfile = firebase.database().ref('/userProfile');
+    this.user = firebase.auth().currentUser;
+    this.userProfileRef = firebase.database().ref('/userProfile');
+    this.currentUserRef = this.userProfileRef.child(this.user.uid);
+    this.followersRef = this.currentUserRef.child('followers');
   }
 
 
-  
-  
+
+
   sendInvitation(email: string): any {
-    this.recipientEmail = email;
-    console.log ("Inside sendInvitation, recipientEmail is..." +this.recipientEmail);
+    this.inviteeEmail = email;
     var subject = "Follow me on pline!";
-    var invitationLink = "pline://pages/review-invitation?email=" + this.recipientEmail;
-    var message = "Hey, <br>this app can help us keep up with each other!<br> Use this <a href='" + invitationLink + "'>link</a> to accept the invitation";
-    console.log ("Inside sendInvitation, message is..."+ message);
+    var invitationLink = "pline://pages/review-invitation?e1="+this.user.email+"&e2=" + this.inviteeEmail;
+    var message = "Hey, <br>this app can help us keep up with each other!<br> Use this <a href='" + invitationLink + "'>"+invitationLink+"</a> to accept the invitation";
+
     // Share via email
-    return SocialSharing.shareViaEmail(message, subject, this.recipientEmail).then(() => {
-      this.saveInvitee();
+    return SocialSharing.shareViaEmail(message, subject, this.inviteeEmail).then(() => {
+      this.saveFollower();
       return "success";
 
 
@@ -36,23 +42,15 @@ export class InvitationService {
 
   }
 
-  saveInvitee() {
+  saveFollower() {
 
-    var user = firebase.auth().currentUser;
-    console.log ("Inside saveInvitee, current user is... "+user.uid);
-
-    if (user) {
-
-      this.userProfile.child(user.uid).update({
-        recipientEmail:this.recipientEmail
-      });
-      
-    } else {
-      // No user is signed in.
-    }
-
+    var newFollowerRef = this.followersRef.push();
+    newFollowerRef.set({
+      'invitationEmail': this.inviteeEmail,
+      'invitationDate':new Date().getDate
+     
+    });
 
   }
-
 
 }

@@ -28,9 +28,9 @@ export class SignUpPage {
     public alertCtrl: AlertController) {
 
     this.registerFormGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      name: ['Izzy Divine', Validators.required],
+      email: ['mira.v.graef@gmail.com', Validators.compose([Validators.required, EmailValidator.isValid])],
+      password: ['izzylinus', Validators.compose([Validators.minLength(6), Validators.required])]
     });
   }
 

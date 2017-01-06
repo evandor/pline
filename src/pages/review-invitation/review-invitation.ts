@@ -9,11 +9,13 @@ import { InvitationService } from '../../providers/invitation-service';
 })
 export class ReviewInvitationPage {
 
-  email:string;
+  hostEmail:string;
+  inviteeEmail:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public _invitationService: InvitationService) {
 
-    this.email=navParams.get('email');
+    this.hostEmail=navParams.get('e1');
+    this.inviteeEmail=navParams.get('e2');
     
   }
 

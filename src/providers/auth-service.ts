@@ -7,12 +7,13 @@ import firebase from 'firebase';
 export class AuthService {
 
   public fireAuth: any;
-  public userProfile: any;
+  public userProfileRef: any;
+
 
   constructor() {
     this.fireAuth = firebase.auth(); // We are creating an auth reference.
     // This declares a database reference for the userProfile/ node.
-    this.userProfile = firebase.database().ref('/userProfile');
+    this.userProfileRef = firebase.database().ref('/userProfile');
 
   }
 
@@ -40,17 +41,22 @@ export class AuthService {
       newUser.updateProfile({
         displayName: name
       }).then(function () {
-        // Update successful.
+        newUser.sendEmailVerification();
       }, function (error) {
-        // An error happened.
       });
 
-      this.userProfile.child(newUser.uid).set({
+      this.userProfileRef.child(newUser.uid).set({
         email: email,
         name: name
       });
-      newUser.sendEmailVerification();
+
+
+
     });
+  }
+
+  confirmAccount(): any {
+    return this.fireAuth.currentUser.sendEmailVerification();
   }
 
   /**
@@ -71,7 +77,7 @@ export class AuthService {
     return this.fireAuth.signOut();
   }
 
-  confirmedUser():any{
+  confirmedUser(): any {
     return this.fireAuth.currentUser.emailVerified;
   }
 
