@@ -1,0 +1,8 @@
+Pline target:
+-------------
+ 
+ * General > Signing:           Automatically manage signing: off
+ * General > Signing Debug:     plineappprofile
+ * General > Signing Release:   plineappprofile
+
+ * Capabilities: Push Notifications: on
