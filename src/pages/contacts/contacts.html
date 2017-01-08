@@ -1,9 +1,8 @@
-
 <ion-header>
 
   <ion-navbar>
     <ion-title>My Contacts</ion-title>
-     <ion-buttons end>
+    <ion-buttons end>
       <button ion-button icon-only (click)="openInviteContactPage()">
         <ion-icon name="add"></ion-icon>
       </button>
@@ -14,21 +13,48 @@
 
 
 <ion-content padding>
- <div *ngIf="contactsEmpty()">There are no saved contacts.</div>
+  <div *ngIf="contactsEmpty()">There are no saved contacts.</div>
   <div *ngIf="!contactsEmpty()">
 
-  
 
-      <ion-row *ngFor="let contact of contacts">
 
-        <ion-col>
-          {{contact?.name}} 
-        </ion-col>
-        <ion-col>
-          {{contact?.email}} 
-        </ion-col>
-      </ion-row>
+    <ion-row *ngFor="let contact of contacts">
 
-   
+      <ion-col>
+        {{contact?.name}}
+      </ion-col>
+      <ion-col>
+        {{contact?.email}}
+      </ion-col>
+    </ion-row>
+
+    <ion-list>
+      <ion-list-header>Follower</ion-list-header>
+      <ion-item>Airplane!</ion-item>
+      <ion-item>Caddyshack</ion-item>
+      <ion-item>Coming To America</ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>Pending Invitations</ion-list-header>
+      <ion-item>Terminator II</ion-item>
+      <ion-item>The Empire Strikes Back</ion-item>
+      <ion-item>Blade Runner</ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>Following</ion-list-header>
+      <ion-item>The Evil Dead</ion-item>
+      <ion-item>Poldergeist</ion-item>
+      <ion-item>Aliens</ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>Following Requests</ion-list-header>
+      <ion-item>The Evil Dead</ion-item>
+      <ion-item>Poldergeist</ion-item>
+      <ion-item>Aliens</ion-item>
+    </ion-list>
+
+
   </div>
 </ion-content>

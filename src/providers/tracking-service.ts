@@ -104,7 +104,7 @@ export class TrackingService {
 
     private createMessage(location: PlineLocation, type: MessageType): Message {
         var msg = new Message();
-        msg.timeStamp = new Date().getTime() / 1000;
+        msg.timeStamp = Math.round(new Date().getTime() / 1000);
         msg.user = this.currentUser;
         msg.messageType = type;
         msg.location = location;

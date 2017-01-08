@@ -7,32 +7,34 @@ import firebase from 'firebase';
 @Injectable()
 export class InvitationService {
 
-  
+
   public inviteeEmail: any;
   public userProfileRef: any;
   public currentUserRef: any;
+  public hostUserRef: any;
   public followersRef: any;
-  user: any;
+  public hostFollowersRef: any;
+  currentUser: any;
+ 
 
   constructor() {
-    this.user = firebase.auth().currentUser;
+    this.currentUser = firebase.auth().currentUser;
     this.userProfileRef = firebase.database().ref('/userProfile');
-    this.currentUserRef = this.userProfileRef.child(this.user.uid);
+    this.currentUserRef = this.userProfileRef.child(this.currentUser.uid);
     this.followersRef = this.currentUserRef.child('followers');
   }
 
-
-
-
   sendInvitation(email: string): any {
     this.inviteeEmail = email;
+    var key= this.saveInvitation();
+    //console.log("Key is ", key);
     var subject = "Follow me on pline!";
-    var invitationLink = "pline://pages/review-invitation?e1="+this.user.email+"&e2=" + this.inviteeEmail;
-    var message = "Hey, <br>this app can help us keep up with each other!<br> Use this <a href='" + invitationLink + "'>"+invitationLink+"</a> to accept the invitation";
+    var invitationLink = "pline://pages/review-invitation?uid=" + this.currentUser.uid +"&key="+key;
+    var message = "Hey, <br>this app can help us keep up with each other!<br> Use this <a href='" + invitationLink + "'>" + invitationLink + "</a> to accept the invitation";
 
     // Share via email
     return SocialSharing.shareViaEmail(message, subject, this.inviteeEmail).then(() => {
-      this.saveFollower();
+      
       return "success";
 
 
@@ -42,15 +44,37 @@ export class InvitationService {
 
   }
 
-  saveFollower() {
-    console.log("Inside save follower");
+  saveInvitation():any {
     var newFollowerRef = this.followersRef.push();
-    console.log("Inside save follower"+newFollowerRef+this.inviteeEmail);
     newFollowerRef.set({
-      'invitationEmail': this.inviteeEmail
-     
+      'invitationEmail': this.inviteeEmail,
+      'invitationDate': Math.round(new Date().getTime() / 1000)
+
+    });
+
+    return newFollowerRef.key;
+  }
+
+
+  getUserProfile(userUID: string): any {
+    return firebase.database().ref('/userProfile/' + userUID).once('value').then(function (snapshot) {
+      return snapshot.val();
     });
 
   }
+
+
+  setFollower(hostUID: string, followerUID:string){
+    this.hostUserRef = this.userProfileRef.child(hostUID);
+    this.hostFollowersRef = this.hostUserRef.child('followers');
+    var hostFollowerRef= this.hostFollowersRef.child(followerUID);
+    hostFollowerRef.update({
+      'followerUID': this.currentUser.uid
+    })
+
+
+  }
+
+
 
 }
