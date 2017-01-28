@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Message } from '../../domain/message';
@@ -28,6 +28,7 @@ declare var google;
 })
 export class HomePage {
 
+ 
   messages: Array<Message> = new Array();
   places: Array<PlineLocation> = new Array();
   testLocation1: PlineLocation = new PlineLocation();
@@ -41,7 +42,10 @@ export class HomePage {
     public storage: Storage,
     private _trackingService: TrackingService,
     private _locationService: LocationService,
-    public _authService: AuthService) {
+    public _authService: AuthService,
+    public menu: MenuController) {
+
+    menu.enable(true);
 
     storage.get('places').then((result) => {
       if (result == null) {

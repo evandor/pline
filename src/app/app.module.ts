@@ -17,6 +17,7 @@ import { Storage } from '@ionic/storage';
 import { LocationService } from '../providers/location-service';
 import { AuthService } from '../providers/auth-service';
 import { InvitationService } from '../providers/invitation-service';
+import { UserService } from '../providers/user-service';
 import {TimestampPipe} from '../pipes/timestamp-pipe';
 
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -75,6 +76,12 @@ const cloudSettings: CloudSettings = {
     ResetPasswordPage,
     ReviewInvitationPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage, LocationService, AuthService, InvitationService]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler}, 
+    Storage, 
+    LocationService, 
+    AuthService, 
+    InvitationService, 
+    UserService]
 })
 export class AppModule {}
