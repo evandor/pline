@@ -68,4 +68,5 @@
   </plugin>
   <icon src="resources/ios/icon/icon-small@3x.png"/>
   <allow-navigation href="http://192.168.178.21:8100"/>
+  <allow-navigation href="http://192.168.178.42:8000"/>
 </widget>

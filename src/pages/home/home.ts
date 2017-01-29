@@ -93,7 +93,7 @@ export class HomePage {
     _trackingService.register(storage, ctx._locationService).subscribe(
       function (messagePromise: Promise<Message>) {
         messagePromise.then((msg) => {
-          console.log(msg);
+          console.log("received message from tracking service", msg);
           ctx.messages.push(msg);
         }).catch((error) => {
           console.log('onError: %s', error);

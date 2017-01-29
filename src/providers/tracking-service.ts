@@ -34,7 +34,7 @@ export class TrackingService {
                 }
             }
         });
-        console.log("Current users set to", this.currentUser);
+        console.log("Current user set to", this.currentUser);
 
         // todo: move to "after login()", see http://docs.ionic.io/services/push/ "Registering device tokens"
         this.push.register().then((t: PushToken) => {
@@ -55,7 +55,7 @@ export class TrackingService {
         this.storage = storage;
 
         var ctx = this;
-        return Observable.timer(1000, 300000).map((x) => {
+        return Observable.timer(1000, 60000).map((x) => {
             console.log("invocation " + x);
             return new Promise<Message>((resolve, reject) => {
                 locationService.getCurrentPlineLocation().then((currentLoc) => {
