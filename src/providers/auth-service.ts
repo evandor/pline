@@ -82,6 +82,11 @@ export class AuthService {
     return this.fireAuth.currentUser.emailVerified;
   }
 
+ /**
+  * Needed for user status update (registered or confirmed user) 
+ e.g. if user switches from Pline-App to Email-Account to confirm his email an returns back to app
+ firebase will not automatically pass this information
+ */
   reloadUser():any{
       return this.fireAuth.currentUser.reload();
   }

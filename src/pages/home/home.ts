@@ -16,7 +16,6 @@ import { TrackingService } from '../../providers/tracking-service';
 import { LocationService } from '../../providers/location-service';
 import { AuthService } from '../../providers/auth-service';
 
-
 import * as moment from 'moment';
 
 declare var google;
@@ -28,7 +27,6 @@ declare var google;
 })
 export class HomePage {
 
- 
   messages: Array<Message> = new Array();
   places: Array<PlineLocation> = new Array();
   testLocation1: PlineLocation = new PlineLocation();
@@ -167,14 +165,24 @@ export class HomePage {
 
   showVerifyAccountAlert() {
     let alert = this.alertCtrl.create({
-      subTitle: "Please confirm your email first!",
+      title: 'Did you confirm your email?',
+      message: "In order to invite someone please click the confirmation link we've sent you.",
       buttons: [
         {
           text: "Resend email",
           handler: () => {
             this._authService.confirmAccount;
+          },
+          cssClass: "alert-btn"
+        },
+        {
+          text: "OK",
+          handler: () => {
+            console.log('Ok clicked');
           }
-        }]
+        }
+        
+        ]
     });
     alert.present();
   }

@@ -26,10 +26,7 @@ export class InviteContactPage {
     });
 
     
-  }
-
-  
-  
+  }  
   inviteContact() { 
       this._invitationService.sendInvitation(this.inviteFormGroup.value.email).then(() => {
         this.showInvitationSentAlert();
@@ -37,8 +34,6 @@ export class InviteContactPage {
       }, (error) => {
         alert("send failed");
       });
-    
-
   }
 
   showInvitationSentAlert() {
@@ -55,20 +50,6 @@ export class InviteContactPage {
     });
     alert.present();
   }
+
   
-  showConfirmationAlert() {
-    let alert = this.alertCtrl.create({
-      subTitle: "Great, just click the email link we've sent you",
-      buttons: [
-        {
-          text: "OK",
-          handler: () => {
-            console.log('OK clicked');
-          }
-        }]
-
-    });
-    alert.present();
-  }
-
 }

@@ -12,8 +12,12 @@ export class IntroPage {
 
   constructor(public navCtrl: NavController) {}
 
-  agreed() {
+  signUpEmail() {
     this.navCtrl.push(SignUpPage);
+  }
+
+  signUpFacebook() {
+    //TO BE DONE
   }
 
    login(){

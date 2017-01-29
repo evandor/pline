@@ -1,38 +1,24 @@
 <ion-content padding>
-
-  <ion-row>
-    <ion-col text-center>
-      pline
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col text-center>
-      the simplest way to tell where you are
-    </ion-col>
-  </ion-row>
-  <div>
-    <ion-row>
-      <ion-col text-center>
-        <button ion-button (click)="agreed()">
+  <div style="text-align: center">
+    <h1>pline</h1>
+    <h2>the simplest way to tell where you are</h2>
+    <p>
+      <button ion-button (click)="signUpEmail()">
             Sign up with Email
         </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button (click)="login()">
-            Login
+      <button ion-button (click)="signUpFacebook()">
+            Sign up with Facebook
         </button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        Have an account? <div (click)="login()"><b>Log in</b></div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        By signing up you agree to the 
-        <br><a href="http://www.pline.one/terms.html">Pline Terms of Service and Privacy Policy</a>
-      </ion-col>
-    </ion-row>
+    </p>
+    <p>
+      Have an account?
+    </p>
+    <p>
+      <button ion-button clear (click)="login()">Log in</button>
+    </p>
+    <p>
+      By signing up you agree to the
+      <br><a href="http://www.pline.one/terms.html">Pline Terms of Service and Privacy Policy</a>
+    </p>
   </div>
 </ion-content>
